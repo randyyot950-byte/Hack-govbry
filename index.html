@@ -4,44 +4,97 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal Pemerintah (FAKE)</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      text-align: center;
+      padding: 20px;
+    }
+    .page { display: none; }
+    .active { display: block; }
+    input, button {
+      padding: 5px;
+      margin: 5px;
+      font-family: monospace;
+    }
+  </style>
 </head>
-<body style="background:black; color:#00ff00; font-family:monospace; text-align:center;">
+<body>
 
-  <h1 style="color:red;">⚠️ PORTAL RESMI PEMERINTAH (FAKE)byobry</h1>
+  <!-- PAGE 1: LOGIN -->
+  <div id="page1" class="page active">
+    <h1 style="color:red;">⚠️ PORTAL RESMI PEMERINTAH (FAKE)</h1>
+    <form onsubmit="event.preventDefault(); loginFake();">
+      <p>Masukkan NIK:</p>
+      <input type="text" id="nik" placeholder="16 digit" maxlength="16" required><br>
+      <p>Password:</p>
+      <input type="password" id="pw" placeholder="password" required><br><br>
+      <button type="submit">Login</button>
+    </form>
+    <p style="color:yellow; margin-top:20px;">
+      ⚠️ Website ini hanya simulasi belajar. Tidak menyimpan data ⚠️
+    </p>
+  </div>
 
-  <form onsubmit="event.preventDefault(); loginFake();">
-    <p>Masukkan NIK:</p>
-    <input type="text" id="nik" maxlength="16" required><br><br>
-    <p>Password:</p>
-    <input type="password" id="pw" required><br><br>
-    <button type="submit">Login</button>
-  </form>
+  <!-- PAGE 2: LOADING -->
+  <div id="page2" class="page">
+    <h2>🔄 Verifikasi NIK... Mohon tunggu...</h2>
+  </div>
 
-  <p id="loadingText" style="color:yellow; margin-top:20px; display:none;">
-    🔄 Verifikasi NIK... Mohon tunggu...
-  </p>
+  <!-- PAGE 3: TERMINAL PALSU -->
+  <div id="page3" class="page" style="text-align:left; color:lime;">
+    <pre id="terminal"></pre>
+  </div>
 
-  <p style="color:yellow; margin-top:20px;">
-    ⚠️ Website ini hanya simulasi belajar. Tidak menyimpan data ⚠️
-  </p>
+  <!-- PAGE 4: DASHBOARD PALSU -->
+  <div id="page4" class="page">
+    <h2>✅ Akses Berhasil</h2>
+    <p>Selamat datang di <b>Portal Data Rahasia</b> (FAKE)</p>
+    <p>[Contoh data penduduk, NIK palsu, dll bisa ditampilkan di sini]</p>
+  </div>
 
   <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
     function loginFake() {
       let nik = document.getElementById("nik").value;
       let pw = document.getElementById("pw").value;
-      let loading = document.getElementById("loadingText");
 
-      if(nik.length === 16 && pw === "1234"){
-        localStorage.setItem("fakeNIK", nik);
-        loading.style.display = "block";
-
+      if (nik.length === 16 && pw.length > 0) {
+        showPage("page2");
         setTimeout(() => {
-          window.location.href = "2.html";
-        }, 2500);
-
+          showPage("page3");
+          fakeTerminal();
+        }, 2000);
       } else {
-        alert("Login gagal! Gunakan NIK 16 digit dan password: 1234");
+        alert("Login gagal ❌. NIK harus 16 digit dan password tidak boleh kosong.");
       }
+    }
+
+    function fakeTerminal() {
+      let terminal = document.getElementById("terminal");
+      let teks = [
+        "Menghubungkan ke server pemerintah...",
+        "Bypass firewall...",
+        "Mengakses database penduduk...",
+        "Mendapatkan data NIK...",
+        "Dekripsi data berhasil...",
+        "Akses diberikan ✅"
+      ];
+      let i = 0;
+      let interval = setInterval(() => {
+        terminal.textContent += teks[i] + "\n";
+        i++;
+        if (i === teks.length) {
+          clearInterval(interval);
+          setTimeout(() => showPage("page4"), 2000);
+        }
+      }, 1000);
     }
   </script>
 
