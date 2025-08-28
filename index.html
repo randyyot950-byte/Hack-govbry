@@ -31,3 +31,109 @@
 
 </body>
 </html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mengakses Sistem...</title>
+</head>
+<body style="background:black; color:#00ff00; font-family:monospace; text-align:center; padding-top:100px;">
+
+  <h2>🔍 Mengakses server pemerintah...</h2>
+  <p>Memverifikasi kredensial...</p>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "3.html";
+    }, 3000);
+  </script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal Akses</title>
+</head>
+<body style="background:black; color:#00ff00; font-family:monospace; padding:20px;">
+
+<pre id="terminal"></pre>
+
+<script>
+  const lines = [
+    "[INFO] Menghubungkan ke server pusat...",
+    "[INFO] Mengambil data enkripsi...",
+    "[INFO] Membuka akses database penduduk...",
+    "[INFO] Autentikasi berhasil...",
+    "[INFO] Data berhasil di-decrypt ✅"
+  ];
+
+  let index = 0;
+  function typeLine() {
+    if(index < lines.length){
+      document.getElementById("terminal").innerHTML += lines[index] + "\n";
+      index++;
+      setTimeout(typeLine, 1500);
+    } else {
+      setTimeout(() => {
+        window.location.href = "4.html";
+      }, 2000);
+    }
+  }
+  typeLine();
+</script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Data (FAKE)</title>
+</head>
+<body style="background:black; color:#00ff00; font-family:monospace; padding:20px;">
+
+  <h2 style="color:cyan;">📊 Data Penduduk (Simulasi)</h2>
+  <p>Selamat datang, NIK: <span id="showNIK"></span></p>
+
+  <table border="1" style="border-collapse:collapse; width:100%; color:#00ff00; margin-top:20px;">
+    <tr><th>NIK</th><th>Nama</th><th>Tanggal Lahir</th><th>Status</th></tr>
+    <tr><td>1234567890123456</td><td>Budi Santoso</td><td>01-01-1990</td><td>Aktif</td></tr>
+    <tr><td>6543210987654321</td><td>Siti Aminah</td><td>05-03-1995</td><td>Aktif</td></tr>
+    <tr><td>9876543210123456</td><td>Joko Widodo</td><td>21-06-1961</td><td>Aktif</td></tr>
+  </table>
+
+  <p style="margin-top:20px; color:yellow;">
+    ⚠️ Data di atas hanyalah simulasi palsu. Tidak ada informasi nyata ⚠️
+  </p>
+
+  <button onclick="logout()" style="margin-top:20px;">Logout</button>
+
+  <script>
+    let nik = localStorage.getItem("fakeNIK");
+    if(nik){
+      document.getElementById("showNIK").textContent = nik;
+    } else {
+      window.location.href = "1.html";
+    }
+
+    function logout(){
+      localStorage.removeItem("fakeNIK");
+      window.location.href = "1.html";
+    }
+  </script>
+
+</body>
+</html>
