@@ -7,131 +7,41 @@
 </head>
 <body style="background:black; color:#00ff00; font-family:monospace; text-align:center;">
 
-  <h1 style="color:red;">⚠️ PORTAL RESMI PEMERINTAH (FAKE)</h1>
+  <h1 style="color:red;">⚠️ PORTAL RESMI PEMERINTAH (FAKE)byobry</h1>
 
   <form onsubmit="event.preventDefault(); loginFake();">
     <p>Masukkan NIK:</p>
-    <input type="text" id="nik" placeholder="1234567890123456" maxlength="16" required><br><br>
+    <input type="text" id="nik" maxlength="16" required><br><br>
     <p>Password:</p>
-    <input type="password" id="pw" placeholder="••••••••" required><br><br>
+    <input type="password" id="pw" required><br><br>
     <button type="submit">Login</button>
   </form>
 
+  <p id="loadingText" style="color:yellow; margin-top:20px; display:none;">
+    🔄 Verifikasi NIK... Mohon tunggu...
+  </p>
+
   <p style="color:yellow; margin-top:20px;">
-    ⚠️ Website ini hanya simulasi untuk belajar. Tidak menyimpan data ⚠️
+    ⚠️ Website ini hanya simulasi belajar. Tidak menyimpan data ⚠️
   </p>
 
   <script>
     function loginFake() {
       let nik = document.getElementById("nik").value;
       let pw = document.getElementById("pw").value;
-      alert("Login berhasil!\nNIK: " + nik + "\nPassword: " + pw + "\n\n(SIMULASI FAKE, data tidak tersimpan)");
-    }
-  </script>
+      let loading = document.getElementById("loadingText");
 
-</body>
-</html>
+      if(nik.length === 16 && pw === "1234"){
+        localStorage.setItem("fakeNIK", nik);
+        loading.style.display = "block";
 
+        setTimeout(() => {
+          window.location.href = "2.html";
+        }, 2500);
 
-
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mengakses Sistem...</title>
-</head>
-<body style="background:black; color:#00ff00; font-family:monospace; text-align:center; padding-top:100px;">
-
-  <h2>🔍 Mengakses server pemerintah...</h2>
-  <p>Memverifikasi kredensial...</p>
-
-  <script>
-    setTimeout(() => {
-      window.location.href = "3.html";
-    }, 3000);
-  </script>
-
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terminal Akses</title>
-</head>
-<body style="background:black; color:#00ff00; font-family:monospace; padding:20px;">
-
-<pre id="terminal"></pre>
-
-<script>
-  const lines = [
-    "[INFO] Menghubungkan ke server pusat...",
-    "[INFO] Mengambil data enkripsi...",
-    "[INFO] Membuka akses database penduduk...",
-    "[INFO] Autentikasi berhasil...",
-    "[INFO] Data berhasil di-decrypt ✅"
-  ];
-
-  let index = 0;
-  function typeLine() {
-    if(index < lines.length){
-      document.getElementById("terminal").innerHTML += lines[index] + "\n";
-      index++;
-      setTimeout(typeLine, 1500);
-    } else {
-      setTimeout(() => {
-        window.location.href = "4.html";
-      }, 2000);
-    }
-  }
-  typeLine();
-</script>
-
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Data (FAKE)</title>
-</head>
-<body style="background:black; color:#00ff00; font-family:monospace; padding:20px;">
-
-  <h2 style="color:cyan;">📊 Data Penduduk (Simulasi)</h2>
-  <p>Selamat datang, NIK: <span id="showNIK"></span></p>
-
-  <table border="1" style="border-collapse:collapse; width:100%; color:#00ff00; margin-top:20px;">
-    <tr><th>NIK</th><th>Nama</th><th>Tanggal Lahir</th><th>Status</th></tr>
-    <tr><td>1234567890123456</td><td>Budi Santoso</td><td>01-01-1990</td><td>Aktif</td></tr>
-    <tr><td>6543210987654321</td><td>Siti Aminah</td><td>05-03-1995</td><td>Aktif</td></tr>
-    <tr><td>9876543210123456</td><td>Joko Widodo</td><td>21-06-1961</td><td>Aktif</td></tr>
-  </table>
-
-  <p style="margin-top:20px; color:yellow;">
-    ⚠️ Data di atas hanyalah simulasi palsu. Tidak ada informasi nyata ⚠️
-  </p>
-
-  <button onclick="logout()" style="margin-top:20px;">Logout</button>
-
-  <script>
-    let nik = localStorage.getItem("fakeNIK");
-    if(nik){
-      document.getElementById("showNIK").textContent = nik;
-    } else {
-      window.location.href = "1.html";
-    }
-
-    function logout(){
-      localStorage.removeItem("fakeNIK");
-      window.location.href = "1.html";
+      } else {
+        alert("Login gagal! Gunakan NIK 16 digit dan password: 1234");
+      }
     }
   </script>
 
